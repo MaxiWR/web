@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario</title>
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS para estilos adicionales -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at top left, #f3e7e9, #e3f3f9, #e2e1f9);
+            background-attachment: fixed;
+            background-size: cover;
+            min-height: 100vh;
+        }
+        .navbar {
+            background-color: #563d7c;
+        }
+        .navbar-brand {
+            color: white !important;
+            font-weight: 600;
+        }
+        .navbar-brand:hover {
+            color: #ffdd57 !important;
+        }
+        #calendar {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border: 2px solid #c0a3e6; /* Borde violeta */
+        }
+        h1 {
+            font-weight: 600;
+            color: #563d7c; /* Título en violeta oscuro */
+        }
+        .add-event-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 24px;
+            background-color: #563d7c; /* Botón violeta */
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .add-event-btn:hover {
+            background-color: #ffdd57;
+            color: #563d7c;
+        }
+        .fc-daygrid-day-number {
+            color: #563d7c !important; /* Números del calendario en violeta oscuro */
+        }
+        .fc-toolbar-title {
+            color: #563d7c !important; /* Título del calendario */
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .modal-header {
+            background-color: #563d7c;
+            color: white;
+        }
+        .btn-close {
+            background-color: white;
+        }
+        .btn-close:hover {
+            background-color: #ffdd57;
+            color: #563d7c;
+        }
+        .btn-dark {
+            background-color: #563d7c;
+            border-color: #563d7c;
+        }
+        .btn-dark:hover {
+            background-color: #ffdd57;
+            color: #563d7c;
+        }
+        .card-option {
+            cursor: pointer;
+            padding: 10px;
+            margin: 5px;
+            background-color: #f0e9ff;
+            border: 2px solid #c0a3e6;
+            border-radius: 8px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .card-option:hover {
+            background-color: #c0a3e6;
+            color: white;
+        }
+        .options-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .nav-link {
+            color: white;
+        }
+        .clear-icon {
+            cursor: pointer;
+            color: #ff4d4d; /* Color de la cruz */
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .time-inputs {
+            display: none; /* Oculto por defecto */
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="index.html">
+            <img src="Logotipo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            Mi Atletismo
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <!-- Opciones de menú se agregarían aquí -->
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Calendario de entrenamiento</h1>
+        <div id="calendar"></div>
+    </div>
+
+    <!-- Botón para agregar eventos -->
+    <button class="add-event-btn" data-bs-toggle="modal" data-bs-target="#eventModal">+</button>
+
+    <!-- Modal para agregar eventos -->
+    <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eventModalLabel">Agregar evento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="eventForm">
+                        <div class="mb-3 position-relative">
+                            <label for="eventTitle" class="form-label">Título del evento</label>
+                            <input type="text" class="form-control" id="eventTitle" placeholder="Introduce el título del evento" required>
+                            <button type="button" class="btn-close clear-icon mt-3" id="clearTitle" aria-label="Clear"></button>
+                        </div>
+                        <!-- Opciones de título como tarjetitas -->
+                        <div class="options-container" id="optionsContainer">
+                            <div class="card-option" data-value="10">10</div>
+                            <div class="card-option" data-value="20">20</div>
+                            <div class="card-option" data-value="30">30</div>
+                            <div class="card-option" data-value="40">40</div>
+                            <div class="card-option" data-value="50">50</div>
+                            <div class="card-option" data-value="60">60</div>
+                            <div class="card-option" data-value="80">80</div>
+                            <div class="card-option" data-value="100">100</div>
+                            <div class="card-option" data-value="120">120</div>
+                            <div class="card-option" data-value="150">150</div>
+                            <div class="card-option" data-value="200">200</div>
+                            <div class="card-option" data-value="220">220</div>
+                            <div class="card-option" data-value="250">250</div>
+                            <div class="card-option" data-value="300">300</div>
+                            <div class="card-option" data-value="400">400</div>
+                            <div class="card-option" data-value="500">500</div>
+                            <div class="card-option" data-value="600">600</div>
+                            <div class="card-option" data-value="800">800</div>
+                            <div class="card-option" data-value="1000">1000</div>
+                            <div class="card-option" data-value="1200">1200</div>
+                            <div class="card-option" data-value="1500">1500</div>
+                            <div class="card-option" data-value="2000">2000</div>
+                            <div class="card-option" data-value="3000">3000</div>
+                        </div>
+
+                        <div class="time-inputs" id="timeInputs">
+                            <label for="minutes" class="form-label">Minutos</label>
+                            <input type="number" class="form-control" id="minutes" placeholder="Minutos" min="0" required>
+                            </div>
+
+                        <div class="mb-3">
+                            <label for="eventDate" class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="eventDate" required>
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100">Añadir evento</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'es',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                editable: true,
+                selectable: true,
+                events: [
+                    {
+                        title: 'Evento de prueba',
+                        start: '2024-09-20'
+                    },
+                    {
+                        title: 'Otro evento',
+                        start: '2024-09-25'
+                    }
+                ]
+            });
+        
+            calendar.render();
+        
+            var numberList = []; // Arreglo para almacenar los números
+        
+            // Establecer la fecha actual por defecto en el campo de fecha
+            var eventDateInput = document.getElementById('eventDate');
+            var today = new Date().toISOString().split('T')[0];
+            eventDateInput.value = today;
+        
+            // Manejar la selección de una tarjeta para el título del evento
+            document.querySelectorAll('.card-option').forEach(function(card) {
+                card.addEventListener('click', function() {
+                    var value = this.getAttribute('data-value');
+                    var titleInput = document.getElementById('eventTitle');
+                    titleInput.value += (titleInput.value ? ', ' : '') + value;
+        
+                    // Mostrar los campos para minutos
+                    document.getElementById('timeInputs').style.display = 'block';
+                    document.getElementById('optionsContainer').style.display = 'none';
+                });
+            });
+        
+            // Capturar el valor de minutos con la tecla Enter sin enviar el formulario
+            document.getElementById('minutes').addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Evita el envío del formulario
+                    var minutesValue = document.getElementById('minutes').value;
+                    if (minutesValue) {
+                        numberList.push(minutesValue); // Añadir el número ingresado a la lista
+                        document.getElementById('minutes').value = ''; // Limpiar el campo
+        
+                        // Actualizar el campo de título con los números ingresados
+                        var titleInput = document.getElementById('eventTitle');
+                        titleInput.value = numberList.join(', ');
+        
+                        // Puedes realizar cualquier lógica adicional aquí
+                        alert('Minutos ingresados: ' + numberList.join(', '));
+                    }
+                }
+            });
+        
+            // Captura el envío del formulario al hacer clic en "Añadir evento"
+            document.getElementById('eventForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+        
+                // Obtener los valores del formulario
+                var title = document.getElementById('eventTitle').value;
+                var date = document.getElementById('eventDate').value;
+                var minutes = numberList.join(', '); // Unir los minutos ingresados
+        
+                if (title && date) {
+                    // Agregar el evento al calendario
+                    calendar.addEvent({
+                        title: title + (minutes ? ' - ' + minutes + ' min' : ''),
+                        start: date
+                    });
+        
+                    // Limpiar el formulario y cerrar el modal
+                    document.getElementById('eventForm').reset();
+                    document.getElementById('timeInputs').style.display = 'none';
+                    document.getElementById('optionsContainer').style.display = 'flex';
+                    eventDateInput.value = today;
+                    numberList = []; // Limpiar la lista de números después de agregar el evento
+                    var modal = bootstrap.Modal.getInstance(document.getElementById('eventModal'));
+                    modal.hide();
+                }
+            });
+        
+            // Manejar el clic en la cruz para limpiar el título del evento
+            document.getElementById('clearTitle').addEventListener('click', function() {
+                document.getElementById('eventTitle').value = '';
+                document.getElementById('timeInputs').style.display = 'none';
+                document.getElementById('optionsContainer').style.display = 'flex';
+                numberList = []; // Limpiar la lista de números cuando se limpie el título
+            });
+        });
+        
+    </script>
+
+</body>
+</html>

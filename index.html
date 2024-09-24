@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        /* Fondo con degradado suave */
+        background: radial-gradient(circle at top left, #f3e7e9, #e3f3f9, #e2e1f9);
+        background-attachment: fixed;
+        background-size: cover;
+        min-height: 100vh;
+    }
+      .navbar {
+        background-color: #563d7c;
+      }
+      .navbar-brand {
+        color: white !important;
+        font-weight: 600;
+      }
+      .navbar-brand:hover {
+        color: #ffdd57 !important;
+      }
+      .card {
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        transition: box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .card:hover {
+        background-color: rgba(86, 61, 124, 0.1);
+        transform: scale(1.02);
+    }
+      .card-title {
+        font-weight: 600;
+        color: #333;
+      }
+      .card-text {
+        color: #555;
+        font-family: "Lora", serif;
+      }
+      .btn-outline-info {
+        border-color: #563d7c;
+        color: #563d7c;
+      }
+      .btn-outline-info:hover {
+        background-color: #563d7c;
+        color: #fff;
+      }
+
+    </style>
+</head>
+<body>
+    
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="indexCHECK.html">
+        <img src="Logotipo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+        Mi Atletismo
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+</nav>
+
+<div class="container-fluid mt-5">
+    <!-- Primera fila de tarjetas -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex">
+        <div class="card flex-fill">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Entrenamientos</h5>
+            <p class="card-text">Contenido relacionado con entrenamientos.</p>
+            <a href="entrenamientoCHECK.html" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex">
+        <div class="card flex-fill">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Calculadora de tiempos</h5>
+            <p class="card-text">Calcula tus tiempos para mejorar.</p>
+            <a href="tiempoCHECK.html" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex">
+        <div class="card flex-fill">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Torneos</h5>
+            <p class="card-text">Información sobre torneos y competencias.</p>
+            <a href="torneosCHECK.html" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex">
+        <div class="card flex-fill">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Dolor muscular y masajes</h5>
+            <p class="card-text">Recomendaciones para aliviar dolores.</p>
+            <a href="#" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Segunda fila de tarjetas -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex">
+        <div class="card flex-fill">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Claves técnicas</h5>
+            <p class="card-text">Técnicas clave para mejorar el rendimiento.</p>
+            <a href="#" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex">
+        <div class="card flex-fill">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Claves de suplementación</h5>
+            <p class="card-text">Consejos sobre el uso adecuado de suplementos.</p>
+            <a href="#" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex">
+        <div class="card flex-fill">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Claves alimenticias</h5>
+            <p class="card-text">Guía para una buena alimentación deportiva.</p>
+            <a href="#" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex">
+        <div class="card flex-fill">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Zapatillas</h5>
+            <p class="card-text">Las mejores opciones de calzado deportivo.</p>
+            <a href="#" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tercera fila de tarjetas -->
+    <div class="row justify-content-center">
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex">
+        <div class="card flex-fill">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Clavos y clavitos</h5>
+            <p class="card-text">Consejos sobre el uso de clavos deportivos.</p>
+            <a href="#" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex">
+        <div class="card flex-fill">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Tarjeta 10</h5>
+            <p class="card-text">Contenido de la tarjeta 10.</p>
+            <a href="#" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex">
+        <div class="card flex-fill">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Tarjeta 11</h5>
+            <p class="card-text">Contenido de la tarjeta 11.</p>
+            <a href="#" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex">
+        <div class="card flex-fill">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Tarjeta 12</h5>
+            <p class="card-text">Contenido de la tarjeta 12.</p>
+            <a href="#" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>
